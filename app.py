@@ -8,8 +8,8 @@ st.set_page_config(page_title="Digit Recognizer", layout="centered")
 st.title("✍️ Handwritten Digit Recognizer")
 st.write("Draw a digit below and let the model predict it.")
 
-# Load the trained model
-model = load_model("mnist.h5")
+# Load the new saved model
+model = load_model("mnist_model.keras")
 
 # Create drawing canvas
 canvas_result = st_canvas(
@@ -29,7 +29,7 @@ if st.button("Predict"):
         img = canvas_result.image_data.astype("uint8")
         img = cv2.cvtColor(img, cv2.COLOR_RGBA2GRAY)
         img = cv2.resize(img, (28, 28))
-        img = 255 - img  # invert: black digit on white
+        img = 255 - img  # invert
         img = img / 255.0
         img = img.reshape(1, 28, 28, 1)
 
